@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: doto.solutions
+testFramework: kotest
+sourceLanguage: kotlin
+buildTool: gradle_kotlin
+features: [agorapulse-gru-http, annotation-api, app-name, config4k, consul, crac, discovery-consul, graalvm, gradle, graphql, http-client, jackson-databind, jdbc-hikari, kotest, kotlin, kotlin-application, kotlin-build, kotlin-extension-functions, liquibase, logback, management, micrometer, micrometer-prometheus, micronaut-aot, micronaut-build, microstream, microstream-rest, multi-tenancy, nats, netflix-hystrix, netty-server, openapi, postgres, problem-json, reactor, reactor-http-client, readme, redis-lettuce, security-annotations, security-jwt, security-oauth2, serialization-jackson, shade, swagger-ui, test-resources, testcontainers, tracing-opentelemetry-annotations, tracing-opentelemetry-exporter-jaeger, tracing-opentelemetry-http, tracing-opentelemetry-jaeger, views-velocity]
