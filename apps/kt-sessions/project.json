@@ -1,0 +1,75 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "kt-sessions",
+  "sourceRoot": "apps/kt-sessions/src",
+  "projectType": "application",
+  "targets": {
+    "run": {
+      "executor": "@nxrocks/nx-micronaut:run",
+      "options": {
+        "root": "apps/kt-sessions"
+      }
+    },
+    "serve": {
+      "executor": "@nxrocks/nx-micronaut:serve",
+      "options": {
+        "root": "apps/kt-sessions"
+      }
+    },
+    "dockerfile": {
+      "executor": "@nxrocks/nx-micronaut:dockerfile",
+      "options": {
+        "root": "apps/kt-sessions"
+      }
+    },
+    "test": {
+      "executor": "@nxrocks/nx-micronaut:test",
+      "options": {
+        "root": "apps/kt-sessions"
+      }
+    },
+    "clean": {
+      "executor": "@nxrocks/nx-micronaut:clean",
+      "options": {
+        "root": "apps/kt-sessions"
+      }
+    },
+    "build": {
+      "executor": "@nxrocks/nx-micronaut:build",
+      "options": {
+        "root": "apps/kt-sessions"
+      },
+      "dependsOn": [
+        "^install"
+      ],
+      "outputs": [
+        "apps/kt-sessions/build"
+      ]
+    },
+    "aot-sample-config": {
+      "executor": "@nxrocks/nx-micronaut:aot-sample-config",
+      "options": {
+        "root": "apps/kt-sessions"
+      }
+    },
+    "format": {
+      "executor": "@nxrocks/nx-micronaut:format",
+      "options": {
+        "root": "apps/kt-sessions"
+      }
+    },
+    "apply-format": {
+      "executor": "@nxrocks/nx-micronaut:apply-format",
+      "options": {
+        "root": "apps/kt-sessions"
+      }
+    },
+    "check-format": {
+      "executor": "@nxrocks/nx-micronaut:check-format",
+      "options": {
+        "root": "apps/kt-sessions"
+      }
+    }
+  },
+  "tags": []
+}
