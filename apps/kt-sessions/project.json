@@ -1,6 +1,6 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "name": "kt-sessions",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/kt-sessions/src",
   "projectType": "application",
   "targets": {
@@ -39,12 +39,8 @@
       "options": {
         "root": "apps/kt-sessions"
       },
-      "dependsOn": [
-        "^install"
-      ],
-      "outputs": [
-        "apps/kt-sessions/build"
-      ]
+      "dependsOn": ["^install"],
+      "outputs": ["apps/kt-sessions/build"]
     },
     "aot-sample-config": {
       "executor": "@nxrocks/nx-micronaut:aot-sample-config",
