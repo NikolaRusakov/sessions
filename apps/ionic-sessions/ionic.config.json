@@ -1,0 +1,7 @@
+{
+  "name": "ionic-sessions",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
