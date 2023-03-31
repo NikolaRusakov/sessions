@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@doto-solutions/ui-sessions": ["libs/ui-sessions/src/index.ts"]
+      "@doto-solutions/ui-sessions": ["libs/ui-sessions/src/index.ts"],
+      "@sessions/nx-plugin": ["libs/nx-plugin/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
