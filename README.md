@@ -11,6 +11,7 @@ type=DEFAULT&name=sessions&package=doto.solutions&javaVersion=JDK_17&lang=KOTLIN
 Nx
 Storybook
 Playwright
+@sveltosis/parser - mitosis component generator from svelte
 
 ## fe
 tailwindcss / windicss - react

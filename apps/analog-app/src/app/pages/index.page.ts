@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { AsyncPipe, JsonPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'analog-app-home',
   standalone: true,
+  imports: [AsyncPipe, JsonPipe],
   template: `
     <div>
       <a href="https://vitejs.dev" target="_blank">
@@ -33,6 +37,7 @@ import { Component } from '@angular/core';
     <p class="read-the-docs">
       Click on the Vite and Angular logos to learn more.
     </p>
+    {{ id$ | async }}
   `,
   styles: [
     `
@@ -55,6 +60,10 @@ import { Component } from '@angular/core';
 })
 export default class HomeComponent {
   count = 0;
+
+  private readonly route = inject(ActivatedRoute);
+
+  readonly id$ = this.route.queryParams.pipe(map((params) => params['id']));
 
   increment() {
     this.count++;

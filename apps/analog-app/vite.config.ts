@@ -15,12 +15,16 @@ export default defineConfig(({ mode }) => {
     build: {
       target: ['es2020'],
     },
+    ssr: {
+      external: ['domino', 'xhr2', '@ionic/angular-server'],
+    },
     plugins: [
       analog({
         ssrBuildDir: '../../dist/apps/analog-app/ssr',
         entryServer: 'apps/analog-app/src/main.server.ts',
+        ssr: false,
         vite: {
-          inlineStylesExtension: 'css',
+          inlineStylesExtension: 'scss',
           tsconfig:
             mode === 'test'
               ? 'apps/analog-app/tsconfig.spec.json'
