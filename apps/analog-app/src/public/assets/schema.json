@@ -5,22 +5,72 @@
     "type": "object",
     "required": ["firstName", "lastName"],
     "properties": {
+      "tasks": {
+        "type": "array",
+        "title": "Tasks",
+        "items": {
+          "type": "object",
+          "required": ["title"],
+          "properties": {
+            "title": {
+              "type": "string",
+              "title": "Title",
+              "description": "A sample title"
+            },
+            "details": {
+              "type": "string",
+              "title": "Task details",
+              "description": "Enter the task details"
+            },
+            "done": {
+              "type": "boolean",
+              "title": "Done?",
+              "default": false
+            }
+          }
+        }
+      },
       "firstName": {
         "type": "string",
-        "title": "First name",
-        "default": "Chuck"
+        "title": "First name"
       },
       "lastName": {
         "type": "string",
-        "title": "Last name"
+        "title": "Last name",
+        "props": { "className": "flex-1" },
+        "expressions": {
+          "hide": "!model.firstName",
+          "props.label": "Why did you choose ' + model.firstName + '?'"
+        }
       },
       "age": {
-        "type": "integer",
-        "title": "Age"
+        "type": "checkbox",
+        "title": "Age",
+        "default": false,
+        "props": { "label": "" }
       },
       "bio": {
         "type": "string",
-        "title": "Bio"
+        "title": "Bio",
+        "expressions": { "hide": "!formState.age" },
+        "templateOptions": {
+          "label": "Bioo"
+        }
+      },
+      "details": {
+        "key": "name",
+        "type": "input",
+        "title": "A registration form",
+        "expressions": {
+          "hide": "model.disabled"
+        }
+      },
+      "name": {
+        "key": "name",
+        "type": "input",
+        "title": "Name",
+        "expressions": { "hide": "model.age" },
+        "props": { "label": "Name" }
       },
       "password": {
         "type": "string",
@@ -31,13 +81,29 @@
         "type": "string",
         "title": "Telephone",
         "minLength": 10
+      },
+      "mac": {
+        "key": "mac",
+        "type": "string",
+        "title": "Mac Address",
+        "pattern": "([0-9A-F]{2}[:-]){5}([0-9A-F]{2})"
+      },
+      "test": {
+        "key": "test",
+        "type": "input",
+        "title": "Test",
+        "expressions": {
+          "props.disabled": "!model.first"
+        },
+        "templateOptions": {
+          "label": "Test"
+        }
       }
     }
   },
   "model": {
-    "lastName": "Norris",
-    "age": 75,
     "bio": "Roundhouse kicking asses since 1940",
-    "password": "noneed"
+    "password": "noneed",
+    "disabled": true
   }
 }

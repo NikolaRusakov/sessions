@@ -8,28 +8,33 @@ type=DEFAULT&name=sessions&package=doto.solutions&javaVersion=JDK_17&lang=KOTLIN
 ```
 
 ## tools
+
 Nx
 Storybook
 Playwright
 @sveltosis/parser - mitosis component generator from svelte
 
 ## fe
+
 tailwindcss / windicss - react
 analog.js
 angular
 astro
 state-adapt; ngneat/elf
 
-## be 
+## be
+
 terminusdb - graph db
 h3 be + zod - http server
 drizzle-orm - orm
 
 ## OPS
+
 SST - deployment
 Dagger.io - CI/CD
 
 ## API
+
 graphql client on BE
 meilisearch client - full-text search
 orval - api client
@@ -37,5 +42,12 @@ Casdoor - IAM,SSO,OIDC, permissions
 MinIO
 
 ## Data
+
 cube.js - user analytics
 jitsu - data integration platform
+
+serve mock json schema w/
+
+```bash
+npx json-server --watch apps/analog-app/src/public/assets/schema.json --port 3006
+```

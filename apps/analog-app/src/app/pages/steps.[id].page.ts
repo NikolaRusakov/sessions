@@ -10,7 +10,7 @@ import {
   RouterLinkWithHref,
   RouterModule,
 } from '@angular/router';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, forkJoin, map, tap } from 'rxjs';
 import { LetModule } from '@rx-angular/template/let';
 import { ForModule } from '@rx-angular/template/for';
 import { PushModule } from '@rx-angular/template/push';
@@ -34,13 +34,77 @@ import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
   template: `
     <h2>{{ productId$ | push }}</h2>
 
+    <div class="font-mono">
+      <header class="px-xl py-md bg-primary-light text-xl font-bold shadow-md">
+        Angular + Tailwind CSS + Nx
+      </header>
+
+      <main
+        class="max-w-xl md:max-w-2xl lg:max-w-6xl mx-auto py-xl px-md md:px-xl grid grid-cols-1 gap-md md:grid-cols-2 lg:grid-cols-3"
+      >
+        <div
+          class="flex flex-col p-lg bg-secondary-light shadow-md hover:shadow-lg"
+        >
+          <div class="pb-md text-lg font-bold">Angular</div>
+          <p class="mb-xl flex-1">
+            Angular is an application design framework and development platform
+            for creating efficient and sophisticated single-page apps.
+          </p>
+          <a
+            class="py-sm px-md bg-primary-dark hover:bg-primary text-white flex self-end"
+            href="https://angular.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Show me!
+          </a>
+        </div>
+
+        <div
+          class="flex flex-col p-lg bg-secondary-light shadow-md hover:shadow-lg"
+        >
+          <div class="pb-md text-lg font-bold">Tailwind CSS</div>
+          <p class="mb-xl flex-1">
+            Tailwind CSS is a utility-first CSS framework packed with classes
+            like flex, pt-4, text-center and rotate-90 that can be composed to
+            build any design, directly in your markup.
+          </p>
+          <a
+            class="py-sm px-md bg-primary-dark hover:bg-primary text-white flex self-end"
+            href="https://tailwindcss.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Show me!
+          </a>
+        </div>
+
+        <div
+          class="flex flex-col p-lg bg-secondary-light shadow-md hover:shadow-lg"
+        >
+          <div class="pb-md text-lg font-bold">Nx</div>
+          <p class="mb-xl flex-1">
+            Nx is a smart, fast and extensible build system with first class
+            monorepo support and powerful integrations.
+          </p>
+          <a
+            class="py-sm px-md bg-primary-dark hover:bg-primary text-white flex self-end"
+            href="https://nx.dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Show me!
+          </a>
+        </div>
+      </main>
+    </div>
     <br />
     <form
       [formGroup]="form3"
-      (ngSubmit)="onSubmit(model3$)"
-      *rxLet="fields3$; let fields3"
+      (ngSubmit)="onSubmit(model$)"
+      *rxLet="fields$; let fields3"
     >
-      <formly-form [form]="form3" [model]="model3$ | push" [fields]="fields3">
+      <formly-form [form]="form3" [model]="model$ | push" [fields]="fields3">
       </formly-form>
 
       <button class="btn btn-primary" type="submit">Submit</button>
@@ -67,10 +131,10 @@ import { FormlyJsonschema } from '@ngx-formly/core/json-schema';
 })
 export default class StepsPageComponent
   extends RxState<{
-    form3: FormGroup;
-    model3: any;
-    options3: FormlyFormOptions;
-    fields3: FormlyFieldConfig[];
+    form: FormGroup;
+    model: any;
+    options: FormlyFormOptions;
+    fields: FormlyFieldConfig[];
   }>
   implements OnInit
 {
@@ -86,29 +150,68 @@ export default class StepsPageComponent
 
   form3: FormGroup = new FormBuilder().group({});
 
-  model3$: Observable<any> = this.select('model3');
-  options3$: Observable<FormlyFormOptions> = this.select('options3');
-  fields3$: Observable<FormlyFieldConfig[]> = this.select('fields3');
+  model$: Observable<any> = this.select('model');
+  options$: Observable<FormlyFormOptions> = this.select('options');
+  fields$: Observable<FormlyFieldConfig[]> = this.select('fields');
 
   constructor() {
     super();
+    this.set({ fields: [], options: {}, model: {} });
   }
   ngOnInit() {
     this.loadExample();
-    this.set({ fields3: [], options3: {}, model3: {} });
   }
 
   loadExample() {
-    this.http
-      .get<any>(`assets/schema.json`)
+    // .get<any>(`assets/schema.json`)
+    this.fetchModelAndSchema()
       .pipe(
-        tap(({ schema, model }) => {
+        tap(([schema, model]) => {
           this.form3 = new FormGroup({});
-          this.set('options3', (_) => ({}));
-          this.set('fields3', (_) => [
+          this.set('options', (_) => ({
+            formState: {
+              age: false,
+            },
+          }));
+          // this.set('options', (_) => ({}));
+          console.log(schema);
+          this.set('fields', (_) => [
             this.formlyJsonschema.toFieldConfig(schema),
+            {
+              key: 'es',
+              type: 'input',
+              expressions: {
+                hide: '!model.first',
+                'props.disabled': 'model.first == "es"',
+              },
+            },
+            {
+              fieldGroupClassName: 'flex',
+              fieldGroup: [
+                {
+                  className: 'flex-1',
+                  type: 'input',
+                  key: 'first',
+                  props: {
+                    label: 'First Name',
+                  },
+                },
+                {
+                  className: 'flex-1',
+                  type: 'input',
+                  key: 'last',
+                  props: {
+                    label: 'Last Name',
+                  },
+                  expressions: {
+                    'props.disabled': '!model.first',
+                  },
+                },
+              ],
+            },
           ]);
-          this.set('model3', (_) => model);
+          this.fields$.pipe(tap(console.log));
+          this.set('model', (_) => model);
         })
       )
       .subscribe();
@@ -119,4 +222,10 @@ export default class StepsPageComponent
       alert(JSON.stringify(model3, null, 2));
     }
   }
+
+  fetchModelAndSchema = () =>
+    forkJoin([
+      this.http.get<any>(`http://localhost:3006/schema`),
+      this.http.get<any>(`http://localhost:3006/model`),
+    ]);
 }
