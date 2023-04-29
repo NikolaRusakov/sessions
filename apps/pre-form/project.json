@@ -1,0 +1,78 @@
+{
+  "name": "pre-form",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/pre-form/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/pre-form"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "pre-form:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "pre-form:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "pre-form:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "preview": {
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "pre-form:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "pre-form:build:development"
+        },
+        "production": {
+          "buildTarget": "pre-form:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["coverage/apps/pre-form"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/apps/pre-form"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/pre-form/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "pre-form:build"
+      }
+    }
+  },
+  "tags": []
+}
