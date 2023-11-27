@@ -70,6 +70,7 @@ specifiers:
   '@popperjs/core': ^2.11.7
   '@preact/compat': ^17.1.2
   '@preact/preset-vite': ^2.5.0
+  '@preact/signals-react': ^1.3.1
   '@prefresh/vite': ^2.2.9
   '@rjsf/core': ^5.6.2
   '@rjsf/utils': ^5.6.2
@@ -127,6 +128,7 @@ specifiers:
   postcss-import: ~15.1.0
   postcss-preset-env: ~8.3.2
   postcss-url: ~10.1.3
+  preact: ^10.13.2
   prettier: ^2.8.8
   prismjs: ^1.29.0
   ramda: ^0.29.0
@@ -188,6 +190,7 @@ dependencies:
   '@nrwl/angular': 15.9.1_wa3paqajrmculw2ypio6kavaqe
   '@nxext/ionic-angular': 15.7.0_4s5sgwhg4oogcpqnq7hqeepyki
   '@popperjs/core': 2.11.7
+  '@preact/signals-react': 1.3.1_react@18.2.0
   '@rjsf/core': 5.6.2_z3pht4sgsiqwwidxbt3gorpdum
   '@rjsf/utils': 5.6.2_react@18.2.0
   '@rjsf/validator-ajv8': 5.6.2_@rjsf+utils@5.6.2
@@ -213,6 +216,7 @@ dependencies:
   h3: 1.6.4
   h3-zod: 0.4.2_h3@1.6.4+zod@3.21.4
   marked: 4.3.0
+  preact: 10.13.2
   prismjs: 1.29.0
   ramda: 0.29.0
   ramda-adjunct: 4.0.0_ramda@0.29.0
@@ -258,15 +262,15 @@ devDependencies:
   '@nxrocks/nx-micronaut': 3.0.0_wsykoklnhdm6u34dwad3l5ui3m
   '@nxrocks/nx-quarkus': 5.0.0_wsykoklnhdm6u34dwad3l5ui3m
   '@playwright/test': 1.33.0
-  '@preact/compat': 17.1.2
-  '@preact/preset-vite': 2.5.0_2kcifqw2ymor52hnodoqvl6jhi
-  '@prefresh/vite': 2.2.9_vite@4.3.3
+  '@preact/compat': 17.1.2_preact@10.13.2
+  '@preact/preset-vite': 2.5.0_dunp6ul5d5sqhewkz6mokqdvni
+  '@prefresh/vite': 2.2.9_preact@10.13.2+vite@4.3.3
   '@rx-angular/eslint-plugin': 1.0.0_iacogk7kkaymxepzhgcbytyi7q
   '@schematics/angular': 15.2.7
   '@swc-node/register': 1.6.5_cjpfceqy5yezucotz3ojvdgspi
   '@swc/cli': 0.1.62_@swc+core@1.3.56
   '@swc/core': 1.3.56_@swc+helpers@0.5.1
-  '@testing-library/preact': 3.2.3
+  '@testing-library/preact': 3.2.3_preact@10.13.2
   '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
   '@types/jest': 29.5.0
   '@types/node': 18.15.11
@@ -6479,13 +6483,15 @@ packages:
     resolution: {integrity: sha512-Cr4OjIkipTtcXKjAsm8agyleBuDHvxzeBoa1v543lbv1YaIwQjESsVcmjiWiPEbC1FIeHOG/Op9kdCmAmiS3Kw==}
     dev: false
 
-  /@preact/compat/17.1.2:
+  /@preact/compat/17.1.2_preact@10.13.2:
     resolution: {integrity: sha512-7pOZN9lMDDRQ+6aWvjwTp483KR8/zOpfS83wmOo3zfuLKdngS8/5RLbsFWzFZMGdYlotAhX980hJ75bjOHTwWg==}
     peerDependencies:
       preact: '*'
+    dependencies:
+      preact: 10.13.2
     dev: true
 
-  /@preact/preset-vite/2.5.0_2kcifqw2ymor52hnodoqvl6jhi:
+  /@preact/preset-vite/2.5.0_dunp6ul5d5sqhewkz6mokqdvni:
     resolution: {integrity: sha512-BUhfB2xQ6ex0yPkrT1Z3LbfPzjpJecOZwQ/xJrXGFSZD84+ObyS//41RdEoQCMWsM0t7UHGaujUxUBub7WM1Jw==}
     peerDependencies:
       '@babel/core': 7.x
@@ -6494,7 +6500,7 @@ packages:
       '@babel/core': 7.21.5
       '@babel/plugin-transform-react-jsx': 7.21.5_@babel+core@7.21.5
       '@babel/plugin-transform-react-jsx-development': 7.18.6_@babel+core@7.21.5
-      '@prefresh/vite': 2.2.9_vite@4.3.3
+      '@prefresh/vite': 2.2.9_preact@10.13.2+vite@4.3.3
       '@rollup/pluginutils': 4.2.1
       babel-plugin-transform-hook-names: 1.0.2_@babel+core@7.21.5
       debug: 4.3.4
@@ -6506,21 +6512,37 @@ packages:
       - supports-color
     dev: true
 
+  /@preact/signals-core/1.3.0:
+    resolution: {integrity: sha512-M+M3ZOtd1dtV/uasyk4SZu1vbfEJ4NeENv0F7F12nijZYedB5wSgbtZcuACyssnTznhF4ctUyrR0dZHuHfyWKA==}
+    dev: false
+
+  /@preact/signals-react/1.3.1_react@18.2.0:
+    resolution: {integrity: sha512-YHWoGAT2Mmv2OGlGx7CCCbaLjAH/InV9ytGAR+esX8Y0HJmMAw51QlqGYOD5GPA5LwimV7Ht1x7KEIegDZIoxg==}
+    peerDependencies:
+      react: ^16.14.0 || 17.x || 18.x
+    dependencies:
+      '@preact/signals-core': 1.3.0
+      react: 18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
   /@prefresh/babel-plugin/0.4.4:
     resolution: {integrity: sha512-/EvgIFMDL+nd20WNvMO0JQnzIl1EJPgmSaSYrZUww7A+aSdKsi37aL07TljrZR1cBMuzFxcr4xvqsUQLFJEukw==}
     dev: true
 
-  /@prefresh/core/1.4.1:
+  /@prefresh/core/1.4.1_preact@10.13.2:
     resolution: {integrity: sha512-og1vaBj3LMJagVncNrDb37Gqc0cWaUcDbpVt5hZtsN4i2Iwzd/5hyTsDHvlMirhSym3wL9ihU0Xa2VhSaOue7g==}
     peerDependencies:
       preact: ^10.0.0
+    dependencies:
+      preact: 10.13.2
     dev: true
 
   /@prefresh/utils/1.1.3:
     resolution: {integrity: sha512-Mb9abhJTOV4yCfkXrMrcgFiFT7MfNOw8sDa+XyZBdq/Ai2p4Zyxqsb3EgHLOEdHpMj6J9aiZ54W8H6FTam1u+A==}
     dev: true
 
-  /@prefresh/vite/2.2.9_vite@4.3.3:
+  /@prefresh/vite/2.2.9_preact@10.13.2+vite@4.3.3:
     resolution: {integrity: sha512-1ERBF85Ja9/lkrfaltmo4Gca7R2ClQPSHHDDysFgfvPzHmLUeyB0x9WHwhwov/AA1DnyPhsfYT54z3yQd8XrgA==}
     peerDependencies:
       preact: ^10.4.0
@@ -6528,9 +6550,10 @@ packages:
     dependencies:
       '@babel/core': 7.21.5
       '@prefresh/babel-plugin': 0.4.4
-      '@prefresh/core': 1.4.1
+      '@prefresh/core': 1.4.1_preact@10.13.2
       '@prefresh/utils': 1.1.3
       '@rollup/pluginutils': 4.2.1
+      preact: 10.13.2
       vite: 4.3.3_@types+node@18.15.11
     transitivePeerDependencies:
       - supports-color
@@ -7298,13 +7321,14 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/preact/3.2.3:
+  /@testing-library/preact/3.2.3_preact@10.13.2:
     resolution: {integrity: sha512-y6Kklp1XK3f1X2fWCbujmJyzkf+1BgLYXNgAx21j9+D4CoqMTz5qC4SQufb1L6q/jxLGACzrQ90ewVOTBvHOfg==}
     engines: {node: '>= 12'}
     peerDependencies:
       preact: '>=10 || ^10.0.0-alpha.0 || ^10.0.0-beta.0'
     dependencies:
       '@testing-library/dom': 8.20.0
+      preact: 10.13.2
     dev: true
 
   /@testing-library/react/14.0.0_biqbaboplfbrettd7655fr4n2y:
@@ -17718,7 +17742,6 @@ packages:
 
   /preact/10.13.2:
     resolution: {integrity: sha512-q44QFLhOhty2Bd0Y46fnYW0gD/cbVM9dUVtNTDKPcdXSMA7jfY+Jpd6rk3GB0lcQss0z5s/6CmVP0Z/hV+g6pw==}
-    dev: false
 
   /prelude-ls/1.1.2:
     resolution: {integrity: sha512-ESF23V4SKG6lVSGZgYNpbsiaAkdab6ZgOxe52p7+Kid3W3u3bxR4Vfd/o21dmN7jSt0IwgZ4v5MUd26FEtXE9w==}
@@ -20358,6 +20381,14 @@ packages:
       querystringify: 2.2.0
       requires-port: 1.0.0
     dev: true
+
+  /use-sync-external-store/1.2.0_react@18.2.0:
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
